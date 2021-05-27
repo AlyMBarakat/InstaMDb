@@ -1,6 +1,16 @@
 import React, { useState, useCallback } from 'react';
-import { View, TouchableOpacity, LayoutAnimation } from 'react-native';
+import {
+    View,
+    TouchableOpacity,
+    LayoutAnimation,
+    Platform,
+    UIManager,
+} from 'react-native';
 import Text from '../../Text';
+
+// allow layout animation on android
+if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental)
+    UIManager.setLayoutAnimationEnabledExperimental(true);
 
 const Description = ({ text }) => {
     const [seeMoreButton, setSeeMoreButton] = useState(false); // see more button visibility
