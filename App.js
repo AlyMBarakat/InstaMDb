@@ -7,9 +7,15 @@
  */
 import 'react-native-gesture-handler';
 import React from 'react';
+import { Platform, UIManager } from 'react-native';
 // Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import Router from './src/Router';
+
+// allow layout animation on android
+if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental)
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+
 
 const App = () => {
   return (
