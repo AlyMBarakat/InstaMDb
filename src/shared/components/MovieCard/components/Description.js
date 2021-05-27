@@ -19,7 +19,13 @@ const Description = ({ text }) => {
 
     // toggled to alternate between see more and see less
     const toggleDescriptionLength = () => {
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring); // animate components transitions
+        LayoutAnimation.configureNext(
+            LayoutAnimation.create(
+                150,
+                LayoutAnimation.Types.linear,
+                LayoutAnimation.Properties.opacity,
+            )
+        ); // animate components transitions
         setTextEnlarged(!textEnlarged);
     }
     // view see more button for lines > maxNumOfLines
