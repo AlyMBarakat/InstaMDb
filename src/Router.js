@@ -6,18 +6,10 @@
  * 
  */
 import React from 'react';
-import {
-    View,
-    Text,
-} from 'react-native';
 // Navigation
 import { createStackNavigator } from '@react-navigation/stack';
 // Features here
-const Temp = () => (
-    <View>
-        <Text>InstaMDb React Native Mobile Application</Text>
-    </View>
-)
+import Movies from './features/Movies';
 
 const RootStack = createStackNavigator();
 
@@ -25,9 +17,20 @@ const Router = () => {
     return (
         <RootStack.Navigator>
             <RootStack.Screen
-                name="Home"
-                component={Temp}
-
+                name="Movies"
+                component={Movies}
+                options={{
+                    headerStyle: {
+                        backgroundColor: '#A71E1E',
+                        shadowColor: "transparent",
+                    },
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                        color: '#fff',
+                        fontFamily: "Rubik-Bold",
+                    },
+                }
+                }
             />
         </RootStack.Navigator>
     );
