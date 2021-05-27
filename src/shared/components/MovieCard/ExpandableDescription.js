@@ -3,19 +3,13 @@ import {
     View,
     TouchableOpacity,
     LayoutAnimation,
-    Platform,
-    UIManager,
 } from 'react-native';
-import Text from '../../Text';
+import Text from '../Text';
 
-// allow layout animation on android
-if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental)
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-
-const Description = ({ text }) => {
+const ExpandableDescription = ({ text }) => {
     const [seeMoreButton, setSeeMoreButton] = useState(false); // see more button visibility
     const [textEnlarged, setTextEnlarged] = useState(false);
-    const maxNumOfLines = 4; // maximum lines to be displayed while collapsed
+    const MAX_NUM_OF_LINES = 4; // maximum lines to be displayed while collapsed
 
     // toggled to alternate between see more and see less
     const toggleDescriptionLength = () => {
@@ -29,21 +23,22 @@ const Description = ({ text }) => {
         );
         setTextEnlarged(!textEnlarged);
     }
-    // view see more button for lines > maxNumOfLines
+    // Determine if see more button should be displayed or not
+    // based on number of lines returned by text layout change event
     const onTextLayout = useCallback(
         textLayoutEvent => {
-            setSeeMoreButton(textLayoutEvent.nativeEvent.lines.length >= maxNumOfLines);
+            setSeeMoreButton(textLayoutEvent.nativeEvent.lines.length >= MAX_NUM_OF_LINES);
         }, []);
 
     return (
         <View>
             {/* Main description text */}
-            < Text
+            <Text
                 light
                 size={14}
                 color='#988989'
                 // zero is the default value for numberOfLines ~ show all text
-                numberOfLines={textEnlarged ? 0 : maxNumOfLines}
+                numberOfLines={textEnlarged ? 0 : MAX_NUM_OF_LINES}
                 selectable={true}
                 onTextLayout={onTextLayout}
                 style={{ lineHeight: 18 }}
@@ -51,7 +46,7 @@ const Description = ({ text }) => {
                 {text}
             </Text >
             {/* See more / See less button */}
-            { seeMoreButton &&
+            {seeMoreButton &&
                 <TouchableOpacity
                     style={{ alignSelf: 'flex-end' }}
                     onPress={toggleDescriptionLength}
@@ -65,4 +60,4 @@ const Description = ({ text }) => {
         </View>
     );
 }
-export default Description;
+export default ExpandableDescription;
