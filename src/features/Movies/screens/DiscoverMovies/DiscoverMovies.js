@@ -6,10 +6,11 @@
  * 
  */
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, ActivityIndicator, SafeAreaView, RefreshControl, Platform, View } from 'react-native';
+import { FlatList, StyleSheet, ActivityIndicator, SafeAreaView, RefreshControl, Platform, View, TouchableOpacity } from 'react-native';
 import MovieCard from '../../../../shared/components/MovieCard';
 import fetchMovies from '../../API/fetchMovies';
 import Toast from 'react-native-toast-message';
+import Text from "../../../../shared/components/Text";
 
 
 const DiscoverMovies = () => {
@@ -43,8 +44,8 @@ const DiscoverMovies = () => {
             }, 1000);
         }
         catch (error) {
-            if (currentStatus === "INTIAIL_LIST_LOADING") {
-                return setCurrentStatus("IDLE");
+            if (currentStatus === "IDLE") {
+                return setCurrentStatus("INITIAL_LOADING_ERROR");
             }
             return Toast.show({
                 type: "error",
@@ -69,6 +70,22 @@ const DiscoverMovies = () => {
     }, [currentStatus])
 
     const renderMovieCard = ({ item }) => <MovieCard movieDetails={item} style={{ marginBottom: 20 }} />
+
+    if (currentStatus === "INITIAL_LOADING_ERROR") {
+        return (
+            <SafeAreaView style={styles.container}>
+                <View style={styles.tryAgain}>
+                    <Text bold style={{ fontSize: 60 }}>☹️</Text>
+                    <Text size={25}>An error occured</Text>
+                    {/* Try Again */}
+                    <TouchableOpacity style={styles.reloadButton} onPress={() => setCurrentStatus("IDLE")}>
+                        <Text bold size={14}>Reload</Text>
+                    </TouchableOpacity>
+                </View>
+            </SafeAreaView>
+        );
+    }
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -98,7 +115,7 @@ const DiscoverMovies = () => {
                             <RefreshControl
                                 refreshing={false}
                                 onRefresh={handleMoviesRefreshing}
-                                tintColor='#fff'
+                                tintColor='transparent'
                                 progressBackgroundColor='gray'
                             />
                         }
@@ -122,6 +139,20 @@ const styles = StyleSheet.create({
     loadingSpinner: {
         marginBottom: 20,
     },
+    reloadButton: {
+        backgroundColor: "#731111",
+        paddingHorizontal: 50,
+        paddingVertical: 15,
+        borderRadius: 5,
+        marginTop: 10
+    },
+    tryAgain: {
+        padding: 20,
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1,
+    }
 })
 
 export default DiscoverMovies;
