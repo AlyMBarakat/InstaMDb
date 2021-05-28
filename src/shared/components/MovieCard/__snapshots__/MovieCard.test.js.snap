@@ -1,0 +1,487 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  onLayout={[Function]}
+>
+  <View
+    style={
+      Object {
+        "borderRadius": 5,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "marginBottom": 10,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "aspectRatio": 0.6666666666666666,
+          "backgroundColor": "#351818",
+          "borderBottomLeftRadius": 5,
+          "borderTopLeftRadius": 5,
+          "width": "40%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "position": "relative",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flex": 1,
+              },
+              Object {
+                "backgroundColor": "#351818",
+                "overflow": "hidden",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+          "marginHorizontal": 10,
+          "marginVertical": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "position": "relative",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Array [
+                Object {
+                  "height": 20,
+                  "width": "100%",
+                },
+                Object {
+                  "backgroundColor": "red",
+                  "borderRadius": 4,
+                  "marginTop": 6,
+                },
+              ],
+              Object {
+                "backgroundColor": "#351818",
+                "overflow": "hidden",
+              },
+            ]
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "position": "relative",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Array [
+                Object {
+                  "height": 20,
+                  "width": "40%",
+                },
+                Object {
+                  "backgroundColor": "red",
+                  "borderRadius": 4,
+                  "marginTop": 6,
+                },
+              ],
+              Object {
+                "backgroundColor": "#351818",
+                "overflow": "hidden",
+              },
+            ]
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "position": "relative",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Array [
+                Object {
+                  "height": 50,
+                  "width": "100%",
+                },
+                Object {
+                  "backgroundColor": "red",
+                  "borderRadius": 4,
+                  "marginTop": 6,
+                },
+              ],
+              Object {
+                "backgroundColor": "#351818",
+                "overflow": "hidden",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders correctly 2`] = `
+<View
+  style={
+    Array [
+      undefined,
+      Object {
+        "backgroundColor": "#351818",
+        "borderRadius": 5,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+      },
+    ]
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": "https://image.tmdb.org/t/p/w342//msI5a9TPnepx47JUb2vl88hb80R.jpg",
+      }
+    }
+    style={
+      Object {
+        "aspectRatio": 0.6666666666666666,
+        "borderBottomLeftRadius": 5,
+        "borderTopLeftRadius": 5,
+        "width": "40%",
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#D73B3B",
+              "fontFamily": "Rubik-Bold",
+              "fontSize": 18,
+            },
+            undefined,
+          ]
+        }
+      >
+        Miraculous World: Shanghai – The Legend of Ladydragon
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#D88282",
+              "fontFamily": "Rubik-Medium",
+              "fontSize": 13,
+            },
+            Object {
+              "marginVertical": 3,
+            },
+          ]
+        }
+      >
+        2021-04-04
+      </Text>
+      <Text
+        numberOfLines={4}
+        onTextLayout={[Function]}
+        selectable={true}
+        style={
+          Array [
+            Object {
+              "color": "#988989",
+              "fontFamily": "Rubik-Light",
+              "fontSize": 14,
+            },
+            Object {
+              "lineHeight": 18,
+            },
+          ]
+        }
+      >
+        To join Adrien in Shanghai, Marinette is going to visit her uncle Wang who is celebrating his anniversary. But, as soon as she arrives in China, her purse gets stolen with Tikki inside, whom she needs to secretly transform into Ladybug! Without money and alone in the immense city, Marinette accepts the help of a young and resourceful girl, Fei. The two girls will ally and discover the existence of a new magical jewel, the Prodigious. Hawk Moth, also present in Shanghai, seeks to finding it since a long time...
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders movie card correctly 1`] = `
+<View
+  style={
+    Array [
+      undefined,
+      Object {
+        "backgroundColor": "#351818",
+        "borderRadius": 5,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+      },
+    ]
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": "https://image.tmdb.org/t/p/w342//msI5a9TPnepx47JUb2vl88hb80R.jpg",
+      }
+    }
+    style={
+      Object {
+        "aspectRatio": 0.6666666666666666,
+        "borderBottomLeftRadius": 5,
+        "borderTopLeftRadius": 5,
+        "width": "40%",
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#D73B3B",
+              "fontFamily": "Rubik-Bold",
+              "fontSize": 18,
+            },
+            undefined,
+          ]
+        }
+      >
+        Miraculous World: Shanghai – The Legend of Ladydragon
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#D88282",
+              "fontFamily": "Rubik-Medium",
+              "fontSize": 13,
+            },
+            Object {
+              "marginVertical": 3,
+            },
+          ]
+        }
+      >
+        2021-04-04
+      </Text>
+      <Text
+        numberOfLines={4}
+        onTextLayout={[Function]}
+        selectable={true}
+        style={
+          Array [
+            Object {
+              "color": "#988989",
+              "fontFamily": "Rubik-Light",
+              "fontSize": 14,
+            },
+            Object {
+              "lineHeight": 18,
+            },
+          ]
+        }
+      >
+        To join Adrien in Shanghai, Marinette is going to visit her uncle Wang who is celebrating his anniversary. But, as soon as she arrives in China, her purse gets stolen with Tikki inside, whom she needs to secretly transform into Ladybug! Without money and alone in the immense city, Marinette accepts the help of a young and resourceful girl, Fei. The two girls will ally and discover the existence of a new magical jewel, the Prodigious. Hawk Moth, also present in Shanghai, seeks to finding it since a long time...
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders movie card loading skeleton correctly 1`] = `
+<View
+  onLayout={[Function]}
+>
+  <View
+    style={
+      Object {
+        "borderRadius": 5,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "marginBottom": 10,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "aspectRatio": 0.6666666666666666,
+          "backgroundColor": "#351818",
+          "borderBottomLeftRadius": 5,
+          "borderTopLeftRadius": 5,
+          "width": "40%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "position": "relative",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flex": 1,
+              },
+              Object {
+                "backgroundColor": "#351818",
+                "overflow": "hidden",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+          "marginHorizontal": 10,
+          "marginVertical": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "position": "relative",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Array [
+                Object {
+                  "height": 20,
+                  "width": "100%",
+                },
+                Object {
+                  "backgroundColor": "red",
+                  "borderRadius": 4,
+                  "marginTop": 6,
+                },
+              ],
+              Object {
+                "backgroundColor": "#351818",
+                "overflow": "hidden",
+              },
+            ]
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "position": "relative",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Array [
+                Object {
+                  "height": 20,
+                  "width": "40%",
+                },
+                Object {
+                  "backgroundColor": "red",
+                  "borderRadius": 4,
+                  "marginTop": 6,
+                },
+              ],
+              Object {
+                "backgroundColor": "#351818",
+                "overflow": "hidden",
+              },
+            ]
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "position": "relative",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Array [
+                Object {
+                  "height": 50,
+                  "width": "100%",
+                },
+                Object {
+                  "backgroundColor": "red",
+                  "borderRadius": 4,
+                  "marginTop": 6,
+                },
+              ],
+              Object {
+                "backgroundColor": "#351818",
+                "overflow": "hidden",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
