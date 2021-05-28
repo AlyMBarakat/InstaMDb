@@ -7,9 +7,8 @@
  */
 import React from 'react';
 import { View, Image } from 'react-native';
-import Text from '../Text';
 import styles from './MovieCard.styles';
-import ExpandableDescription from './ExpandableDescription';
+import ExpandableMovieDetails from './ExpandableMovieDetails';
 import MovieCardLoading from './MovieCard.loading';
 
 const MovieCard = React.memo(({ loading, movieDetails, style }) => {
@@ -28,12 +27,11 @@ const MovieCard = React.memo(({ loading, movieDetails, style }) => {
                         />
                         {/* Movie's data */}
                         <View style={styles.textContainer}>
-                            {/* Title */}
-                            <Text bold size={18} color='#D73B3B'>{movieDetails.title}</Text>
-                            {/* Date */}
-                            <Text size={13} color='#D88282' style={{ marginVertical: 3 }}>{movieDetails.releaseDate}</Text>
-                            {/* ExpandableDescription */}
-                            <ExpandableDescription text={movieDetails.overview} />
+                            {/* Movie Details */}
+                            <ExpandableMovieDetails
+                                title={movieDetails.title}
+                                releaseDate={movieDetails.releaseDate}
+                                overview={movieDetails.overview} />
                         </View >
                     </View >
 
