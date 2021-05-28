@@ -20,3 +20,6 @@ If already setup, proceed to installation.
 1. iOS: yarn ios
 2. Android: yarn android
 
+## Running tests
+- Run `yarn test`
+
