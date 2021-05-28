@@ -1,12 +1,12 @@
 import Axios from 'axios';
-
+import { API_KEY } from '@env';
 
 const axios = Axios.create({
-    baseURL: 'https://api.themoviedb.org/3/',
-    timeout: 10000,
-    params: {
-        api_key: "acea91d2bff1c53e6604e4985b6989e2",
-    },
+  baseURL: 'https://api.themoviedb.org/3/',
+  timeout: 10000,
+  params: {
+    api_key: API_KEY,
+  },
 });
 
 /*
