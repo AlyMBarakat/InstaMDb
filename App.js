@@ -11,6 +11,7 @@ import { Platform, UIManager } from 'react-native';
 // Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import Router from './src/Router';
+import Toast from 'react-native-toast-message';
 
 // allow layout animation on android
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental)
@@ -21,6 +22,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Router />
+      <Toast ref={(ref) => Toast.setRef(ref)} />
     </NavigationContainer>
   )
 }
