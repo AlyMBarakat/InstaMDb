@@ -8,7 +8,6 @@ const styles = new StyleSheet.create({
         justifyContent: 'flex-start',
     },
     poster: {
-        backgroundColor: 'white',
         width: "40%",
         aspectRatio: 2 / 3,
         borderTopLeftRadius: 5,
