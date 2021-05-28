@@ -6,7 +6,7 @@
  * 
  */
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, ActivityIndicator, SafeAreaView, RefreshControl, Platform } from 'react-native';
+import { FlatList, StyleSheet, ActivityIndicator, SafeAreaView, RefreshControl, Platform, View } from 'react-native';
 import MovieCard from '../../../../shared/components/MovieCard';
 import getMovies from '../../API/getMovies';
 
@@ -25,15 +25,9 @@ const DiscoverMovies = () => {
     const [pageNum, setPageNum] = useState(0);
     const MAX_PAGE_NUMBER = 500;
 
-    const fetchMoviesAndUpdate = async () => {
+    const fetchMovies = async () => {
         try {
-            const newData = await getMovies(pageNum + 1);
-            console.log("Requesting page number: ", pageNum + 1);
-            setMoviesData(moviesData => (currentStatus === statuses.REFRESHING ? newData : [...moviesData, ...newData]));
-            setPageNum(pageNum => (pageNum + 1));
-            setTimeout(() => {
-                setCurrentStatus(statuses.LOADED);
-            }, 1000);
+
         }
         catch (error) {
             throw error;
@@ -41,6 +35,7 @@ const DiscoverMovies = () => {
 
     }
 
+    // update current status and trigger movies fetching
     const handleMoviesLoading = async () => {
         try {
             // avoid random calls from FlatList while lazy loading
@@ -51,9 +46,20 @@ const DiscoverMovies = () => {
             // 
             if (currentStatus === statuses.IDLE)
                 setCurrentStatus((currentStatus) => statuses.INITIAL_LOADING);
-            if (currentStatus === statuses.LOADED)
+            else if (currentStatus === statuses.LOADED)
                 setCurrentStatus((currentStatus) => statuses.LAZY_LOADING);
-            await fetchMoviesAndUpdate();
+            // fetch movies
+            const newData = await getMovies(pageNum + 1);
+            console.log("Requesting page number: ", pageNum + 1);
+            // update movies data according to current status
+            // reset data for refreshing or concatinate for loading
+            setMoviesData(moviesData => (currentStatus === statuses.REFRESHING ? newData : [...moviesData, ...newData]));
+            // increment page
+            setPageNum(pageNum => (pageNum + 1));
+            // smoothly return to loaded status
+            setTimeout(() => {
+                setCurrentStatus(statuses.LOADED);
+            }, 1000);
         }
         catch (error) {
             if (currentStatus === "INTIAIL_LIST_LOADING") {
@@ -64,19 +70,24 @@ const DiscoverMovies = () => {
         }
     }
 
-    const handleRefreshing = () => {
+    // reset 
+    const handleMoviesRefreshing = () => {
         setPageNum(0);
         setCurrentStatus(statuses.REFRESHING);
     }
 
+    // initial movies fetch
+    // status: IDLE
     useEffect(() => {
         handleMoviesLoading();
     }, []);
 
+    // fetch Movies during refreshing
+    // status: REFRESHING
     useEffect(() => {
         if (currentStatus === statuses.REFRESHING) {
             console.log("Refreshing...");
-            fetchMoviesAndUpdate();
+            handleMoviesLoading();
         }
 
     }, [setCurrentStatus, currentStatus])
@@ -85,13 +96,13 @@ const DiscoverMovies = () => {
         <SafeAreaView style={styles.container}>
             {
                 currentStatus === statuses.INITIAL_LOADING ?
-                    <MovieCard movieDetails={
-                        {
-                            posterPath: "",
-                            title: "Loading",
-                            overview: "Loading /n Loading  /n Loading  /n Loading  /n Loading"
-                        }
-                    } />
+                    <View style={styles.moviesList}>
+                        <MovieCard loading />
+                        <MovieCard loading />
+                        <MovieCard loading />
+                        <MovieCard loading />
+                        <MovieCard loading />
+                    </View>
                     :
                     <FlatList
                         style={styles.moviesList}
@@ -105,7 +116,7 @@ const DiscoverMovies = () => {
                         refreshControl={
                             <RefreshControl
                                 refreshing={false}
-                                onRefresh={handleRefreshing}
+                                onRefresh={handleMoviesRefreshing}
                                 tintColor='transparent'
                                 progressBackgroundColor='transparent'
                             />
