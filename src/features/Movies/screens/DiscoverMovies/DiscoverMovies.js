@@ -25,16 +25,6 @@ const DiscoverMovies = () => {
     const [pageNum, setPageNum] = useState(0);
     const MAX_PAGE_NUMBER = 500;
 
-    const fetchMovies = async () => {
-        try {
-
-        }
-        catch (error) {
-            throw error;
-        }
-
-    }
-
     // update current status and trigger movies fetching
     const handleMoviesLoading = async () => {
         try {
@@ -43,7 +33,7 @@ const DiscoverMovies = () => {
             if (currentStatus === statuses.LAZY_LOADING || pageNum > MAX_PAGE_NUMBER)
                 return
             console.log("Loading...");
-            // 
+            // start loading process...
             if (currentStatus === statuses.IDLE)
                 setCurrentStatus((currentStatus) => statuses.INITIAL_LOADING);
             else if (currentStatus === statuses.LOADED)
@@ -96,6 +86,7 @@ const DiscoverMovies = () => {
         <SafeAreaView style={styles.container}>
             {
                 currentStatus === statuses.INITIAL_LOADING ?
+                    // movies loading skeleton list
                     <View style={styles.moviesList}>
                         <MovieCard loading />
                         <MovieCard loading />
@@ -104,6 +95,7 @@ const DiscoverMovies = () => {
                         <MovieCard loading />
                     </View>
                     :
+                    // movies list
                     <FlatList
                         style={styles.moviesList}
                         data={moviesData}
