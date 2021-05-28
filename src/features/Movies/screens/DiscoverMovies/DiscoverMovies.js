@@ -8,21 +8,14 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, ActivityIndicator, SafeAreaView, RefreshControl, Platform, View } from 'react-native';
 import MovieCard from '../../../../shared/components/MovieCard';
-import getMovies from '../../API/getMovies';
+import fetchMovies from '../../API/fetchMovies';
+import Toast from 'react-native-toast-message';
 
-
-const statuses = {
-    IDLE: "IDLE",
-    INITIAL_LOADING: "INITIAL_LOADING",
-    LOADED: "LOADED",
-    LAZY_LOADING: "LAZY_LOADING",
-    REFRESHING: "REFRESHING",
-}
 
 const DiscoverMovies = () => {
     const [moviesData, setMoviesData] = useState([]);
-    const [currentStatus, setCurrentStatus] = useState(statuses.IDLE);
-    const [pageNum, setPageNum] = useState(0);
+    const [currentStatus, setCurrentStatus] = useState("IDLE");
+    const [pageNum, setPageNum] = useState(1);
     const MAX_PAGE_NUMBER = 500;
 
     // update current status and trigger movies fetching
@@ -30,62 +23,57 @@ const DiscoverMovies = () => {
         try {
             // avoid random calls from FlatList while lazy loading
             // avoid requesting more than the maximum number of pages
-            if (currentStatus === statuses.LAZY_LOADING || pageNum > MAX_PAGE_NUMBER)
+            if (currentStatus === "LAZY_LOADING" || pageNum > MAX_PAGE_NUMBER)
                 return
-            console.log("Loading...");
             // start loading process...
-            if (currentStatus === statuses.IDLE)
-                setCurrentStatus((currentStatus) => statuses.INITIAL_LOADING);
-            else if (currentStatus === statuses.LOADED)
-                setCurrentStatus((currentStatus) => statuses.LAZY_LOADING);
-            // fetch movies
-            const newData = await getMovies(pageNum + 1);
-            console.log("Requesting page number: ", pageNum + 1);
+            if (currentStatus === "IDLE")
+                setCurrentStatus(() => "INITIAL_LOADING");
+            else if (currentStatus === "LOADED")
+                setCurrentStatus(() => "LAZY_LOADING");
+            // fetch next movies page
+            const newMovies = await fetchMovies(pageNum);
             // update movies data according to current status
             // reset data for refreshing or concatinate for loading
-            setMoviesData(moviesData => (currentStatus === statuses.REFRESHING ? newData : [...moviesData, ...newData]));
+            setMoviesData(moviesData => (currentStatus === "REFRESHING" ? newMovies : [...moviesData, ...newMovies]));
             // increment page
             setPageNum(pageNum => (pageNum + 1));
             // smoothly return to loaded status
             setTimeout(() => {
-                setCurrentStatus(statuses.LOADED);
+                setCurrentStatus("LOADED");
             }, 1000);
         }
         catch (error) {
             if (currentStatus === "INTIAIL_LIST_LOADING") {
                 return setCurrentStatus("IDLE");
             }
-            // Show toast
-            console.log(error);
+            return Toast.show({
+                type: "error",
+                text1: "Something wrong happened 😳",
+                topOffset: 50,
+                text2: "Please try again",
+            });
         }
     }
 
-    // reset 
+    // reset page number
     const handleMoviesRefreshing = () => {
-        setPageNum(0);
-        setCurrentStatus(statuses.REFRESHING);
+        setPageNum(1);
+        setCurrentStatus("REFRESHING");
     }
 
-    // initial movies fetch
-    // status: IDLE
+    // fetch movies when refreshing / idle
     useEffect(() => {
-        handleMoviesLoading();
-    }, []);
-
-    // fetch Movies during refreshing
-    // status: REFRESHING
-    useEffect(() => {
-        if (currentStatus === statuses.REFRESHING) {
-            console.log("Refreshing...");
+        if (currentStatus === "REFRESHING" || currentStatus === "IDLE") {
             handleMoviesLoading();
         }
+    }, [currentStatus])
 
-    }, [setCurrentStatus, currentStatus])
+    const renderMovieCard = ({ item }) => <MovieCard movieDetails={item} style={{ marginBottom: 20 }} />
 
     return (
         <SafeAreaView style={styles.container}>
             {
-                currentStatus === statuses.INITIAL_LOADING ?
+                currentStatus === "INITIAL_LOADING" ?
                     // movies loading skeleton list
                     <View style={styles.moviesList}>
                         <MovieCard loading />
@@ -99,22 +87,23 @@ const DiscoverMovies = () => {
                     <FlatList
                         style={styles.moviesList}
                         data={moviesData}
-                        renderItem={({ item }) => <MovieCard movieDetails={item} style={{ marginBottom: 20 }} />}
+                        renderItem={renderMovieCard}
                         keyExtractor={item => item.id}
                         onEndReached={handleMoviesLoading}
                         onEndReachedThreshold={0}
                         removeClippedSubviews={true}
-                        windowSize={21}
+                        windowSize={11}
+                        initialNumToRender={11}
                         refreshControl={
                             <RefreshControl
                                 refreshing={false}
                                 onRefresh={handleMoviesRefreshing}
-                                tintColor='transparent'
-                                progressBackgroundColor='transparent'
+                                tintColor='#fff'
+                                progressBackgroundColor='gray'
                             />
                         }
-                        ListHeaderComponent={currentStatus === statuses.REFRESHING && <ActivityIndicator color="gray" style={styles.loadingSpinner} />}
-                        ListFooterComponent={currentStatus === statuses.LAZY_LOADING && <ActivityIndicator color="gray" style={styles.loadingSpinner} />}
+                        ListHeaderComponent={Platform.OS === 'ios' && currentStatus === "REFRESHING" && <ActivityIndicator color="gray" style={styles.loadingSpinner} />}
+                        ListFooterComponent={currentStatus === "LAZY_LOADING" && <ActivityIndicator color="gray" style={styles.loadingSpinner} />}
                     />
             }
         </SafeAreaView>
