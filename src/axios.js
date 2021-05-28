@@ -9,33 +9,5 @@ const axios = Axios.create({
   },
 });
 
-/*
-  DEBUGGING ONLY
-*/
-
-// axios.interceptors.request.use(
-//     (req) => {
-//         console.log("Request >");
-//         console.log(req);
-//         return req;
-//     },
-//     (error) => {
-//         console.log(error);
-//         return Promise.reject(error);
-//     }
-// );
-
-// axios.interceptors.response.use(
-//     (res) => {
-//         console.log("Response >");
-//         console.log(res);
-//         return res;
-//     },
-//     (error) => {
-//         console.log(error);
-//         return Promise.reject(error);
-//     }
-// );
-
 
 export default axios;
