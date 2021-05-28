@@ -4,11 +4,11 @@ import Text from '../Text';
 import styles from './MovieCard.styles';
 import ExpandableDescription from './ExpandableDescription';
 
-const MovieCard = ({ movieDetails, style }) => {
+const MovieCard = React.memo(({ movieDetails, style }) => {
     return (
         <View style={[style, styles.container]}>
             <Image
-                source={{ uri: `https://image.tmdb.org/t/p/w185/${movieDetails.posterPath}` }}
+                source={{ uri: `https://image.tmdb.org/t/p/w342/${movieDetails.posterPath}` }}
                 style={styles.poster}
             />
             {/* Movie's data */}
@@ -22,6 +22,6 @@ const MovieCard = ({ movieDetails, style }) => {
             </View >
         </View >
     );
-}
+});
 
 export default MovieCard;
