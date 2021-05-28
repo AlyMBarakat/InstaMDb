@@ -6,12 +6,13 @@
  * 
  */
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, ActivityIndicator, SafeAreaView, RefreshControl, Platform, View, TouchableOpacity } from 'react-native';
-import MovieCard from '../../../../shared/components/MovieCard';
+import { StyleSheet, SafeAreaView, View, TouchableOpacity } from 'react-native';
 import fetchMovies from '../../API/fetchMovies';
 import Toast from 'react-native-toast-message';
 import Text from "../../../../shared/components/Text";
-
+import DiscoverMoviesLoading from "./DiscoverMovies.loading";
+import DiscoverMoviesError from "./DiscoverMovies.error";
+import MoviesList from "./MoviesList";
 
 const DiscoverMovies = () => {
     const [moviesData, setMoviesData] = useState([]);
@@ -69,59 +70,22 @@ const DiscoverMovies = () => {
         }
     }, [currentStatus])
 
-    const renderMovieCard = ({ item }) => <MovieCard movieDetails={item} style={{ marginBottom: 20 }} />
-
+    // handle if API request fails on the first time
     if (currentStatus === "INITIAL_LOADING_ERROR") {
         return (
-            <SafeAreaView style={styles.container}>
-                <View style={styles.tryAgain}>
-                    <Text bold style={{ fontSize: 60 }}>☹️</Text>
-                    <Text size={25}>An error occured</Text>
-                    {/* Try Again */}
-                    <TouchableOpacity style={styles.reloadButton} onPress={() => setCurrentStatus("IDLE")}>
-                        <Text bold size={14}>Reload</Text>
-                    </TouchableOpacity>
-                </View>
-            </SafeAreaView>
+            <DiscoverMoviesError setCurrentStatus={setCurrentStatus} />
         );
     }
-
 
     return (
         <SafeAreaView style={styles.container}>
             {
                 currentStatus === "INITIAL_LOADING" ?
                     // movies loading skeleton list
-                    <View style={styles.moviesList}>
-                        <MovieCard loading />
-                        <MovieCard loading />
-                        <MovieCard loading />
-                        <MovieCard loading />
-                        <MovieCard loading />
-                    </View>
+                    <DiscoverMoviesLoading />
                     :
                     // movies list
-                    <FlatList
-                        style={styles.moviesList}
-                        data={moviesData}
-                        renderItem={renderMovieCard}
-                        keyExtractor={item => item.id}
-                        onEndReached={handleMoviesLoading}
-                        onEndReachedThreshold={0}
-                        removeClippedSubviews={true}
-                        windowSize={11}
-                        initialNumToRender={11}
-                        refreshControl={
-                            <RefreshControl
-                                refreshing={false}
-                                onRefresh={handleMoviesRefreshing}
-                                tintColor='transparent'
-                                progressBackgroundColor='gray'
-                            />
-                        }
-                        ListHeaderComponent={Platform.OS === 'ios' && currentStatus === "REFRESHING" && <ActivityIndicator color="gray" style={styles.loadingSpinner} />}
-                        ListFooterComponent={currentStatus === "LAZY_LOADING" && <ActivityIndicator color="gray" style={styles.loadingSpinner} />}
-                    />
+                    <MoviesList currentStatus={currentStatus} moviesData={moviesData} handleMoviesLoading={handleMoviesLoading} handleMoviesRefreshing={handleMoviesRefreshing} />
             }
         </SafeAreaView>
     );
@@ -134,24 +98,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#290F0F',
     },
     moviesList: {
-        padding: 20,
-    },
-    loadingSpinner: {
-        marginBottom: 20,
-    },
-    reloadButton: {
-        backgroundColor: "#731111",
-        paddingHorizontal: 50,
-        paddingVertical: 15,
-        borderRadius: 5,
-        marginTop: 10
-    },
-    tryAgain: {
-        padding: 20,
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        flex: 1,
+        padding: 20
     }
 })
 
