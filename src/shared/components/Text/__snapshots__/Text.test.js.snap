@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders font weight and size correctly 1`] = `
+Array [
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontFamily": "Rubik-Light",
+          "fontSize": 23,
+        },
+        undefined,
+      ]
+    }
+  >
+    testing
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontFamily": "Rubik-Bold",
+          "fontSize": 19,
+        },
+        undefined,
+      ]
+    }
+  >
+    testing
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontFamily": "Rubik-Regular",
+          "fontSize": 80,
+        },
+        undefined,
+      ]
+    }
+  >
+    testing
+  </Text>,
+]
+`;
+
+exports[`renders font weight correctly 1`] = `
+Array [
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontFamily": "Rubik-Light",
+          "fontSize": 16,
+        },
+        undefined,
+      ]
+    }
+  >
+    testing
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontFamily": "Rubik-Bold",
+          "fontSize": 16,
+        },
+        undefined,
+      ]
+    }
+  >
+    testing
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontFamily": "Rubik-Regular",
+          "fontSize": 16,
+        },
+        undefined,
+      ]
+    }
+  >
+    testing
+  </Text>,
+]
+`;
+
+exports[`renders font weight, size and color correctly 1`] = `
+Array [
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontFamily": "Rubik-Light",
+          "fontSize": 23,
+        },
+        undefined,
+      ]
+    }
+  >
+    testing
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "black",
+          "fontFamily": "Rubik-Bold",
+          "fontSize": 19,
+        },
+        undefined,
+      ]
+    }
+  >
+    testing
+  </Text>,
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#2d2d2d",
+          "fontFamily": "Rubik-Regular",
+          "fontSize": 80,
+        },
+        undefined,
+      ]
+    }
+  >
+    testing
+  </Text>,
+]
+`;
