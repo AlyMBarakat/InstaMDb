@@ -1,3 +1,10 @@
+/**
+ * 
+ * 
+ * MovieCard Loading Skeleton
+ * 
+ * 
+ */
 import React from "react";
 import { View } from "react-native";
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
